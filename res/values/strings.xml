@@ -6050,6 +6050,7 @@
    <string name="imei_information_summary">IMEI relative information</string>
    <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
 
+<<<<<<< HEAD
     <!-- Generic strings -->
     <string name="ok_string">OK</string>
     <string name="default_string">Default</string>
@@ -6136,4 +6137,7 @@
 
     <!-- Kernel Tweaker -->
     <string name="kernel_tweaker_title">Kernel tweaker</string>
+
+    <!-- Restart SystemUI -->
+    <string name="restart_systemui">Restart SystemUI</string>
 </resources>
