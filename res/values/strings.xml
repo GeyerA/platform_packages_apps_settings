@@ -5096,4 +5096,8 @@
     <string name="privacy_mode">Privacy Mode</string>
     <string name="privacy_mode_summary">Disables notifications from being shown and dismissed. This way, you just see the icons of your notifications.</string>
 
+    <!-- Advanced reboot options -->
+    <string name="advanced_reboot_title">Advanced reboot</string>
+    <string name="advanced_reboot_summary">When unlocked, include options for rebooting into recovery or bootloader</string>
+
 </resources>
