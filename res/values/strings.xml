@@ -5014,4 +5014,8 @@
     <string name="start_time_title">Start</string>
     <string name="end_time_title">End</string>
 
+    <!-- Advanced reboot options -->
+    <string name="advanced_reboot_title">Advanced reboot</string>
+    <string name="advanced_reboot_summary">When unlocked, include options for rebooting into recovery or bootloader</string>
+
 </resources>
