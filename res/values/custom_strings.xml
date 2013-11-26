@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- AppOps additions -->
+    <string name="appops_settings">Apps permissions</string>
+    <string name="appops_sysapp_beware">Beware!</string>
+    <string name="appops_sysapp_warning">"Changing permissions of core Android components might lead to undesired behavior. Change settings here at your own risk!</string>
+
+</resources>
