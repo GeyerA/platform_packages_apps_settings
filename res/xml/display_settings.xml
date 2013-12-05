@@ -78,6 +78,11 @@
 
         </PreferenceCategory>
 
+    <PreferenceScreen
+        android:key="quiet_hours_settings"
+        android:fragment="com.android.settings.gummy.QuietHours"
+        android:title="@string/quiet_hours_title" />
+
      <PreferenceScreen
         android:key="status_bar"
         android:fragment="com.android.settings.rascarlo.StatusBarSettings"
