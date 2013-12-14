@@ -73,4 +73,10 @@
 
         </PreferenceCategory>
 
+     <PreferenceScreen
+        android:key="status_bar"
+        android:fragment="com.android.settings.rascarlo.StatusBarSettings"
+        android:title="@string/status_bar_title" />
+
+
 </PreferenceScreen>
