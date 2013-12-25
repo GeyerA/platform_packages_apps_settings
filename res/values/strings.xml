@@ -4910,6 +4910,11 @@
 
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
+    <!-- Status bar clock -->
+    <string name="status_bar_clock_title">Clock</string>
+    <string name="status_bar_show_clock_title">Show clock</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+    <string name="status_bar_am_pm_info">24-hour clock must be disabled</string>
     <!-- Quick settings -->
     <string name="quick_pulldown_title">Quick Settings pulldown</string>
     <string name="quick_pulldown_summary">%1$s edge of the status bar pulls down Quick Settings</string>
