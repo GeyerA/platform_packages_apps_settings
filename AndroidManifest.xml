@@ -1766,6 +1766,8 @@
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
+        <activity android:name=".mahdi.lockscreennotifications.LockscreenNotifications" />
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
