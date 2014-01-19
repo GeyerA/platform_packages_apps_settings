@@ -1245,7 +1245,6 @@
         <item>2</item>
     </string-array>
 
-<<<<<<< HEAD
     <!-- Notification LED -->
     <!-- Values for the notification light pulse spinners -->
     <string-array name="notification_pulse_length_entries">
