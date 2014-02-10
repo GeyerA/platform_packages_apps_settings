@@ -181,13 +181,6 @@
         android:icon="@drawable/ic_action_permission"
         android:title="@string/superuser" />
 
-    <!-- Performance Controls -->
-    <header
-        android:id="@+id/performance_controls"
-        android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings" />
-
     <!-- Date & Time -->
     <header
         android:id="@+id/date_time_settings"
