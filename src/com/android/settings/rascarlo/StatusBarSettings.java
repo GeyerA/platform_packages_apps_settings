@@ -67,6 +67,7 @@ OnPreferenceChangeListener {
                 Settings.System.QS_QUICK_PULLDOWN, 0);
         mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
         updatePulldownSummary(quickPulldownValue);
+
     }
 
     private void updatePulldownSummary(int value) {
