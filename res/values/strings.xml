@@ -6200,4 +6200,7 @@
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
+
+   <!-- Generic strings -->
+   <string name="font_size_sample">Sample</string>
 </resources>
