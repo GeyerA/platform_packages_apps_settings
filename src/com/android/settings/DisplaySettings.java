@@ -61,6 +61,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_PEEK = "notification_peek";
+    private static final String KEY_PEEK_PICKUP_TIMEOUT = "peek_pickup_timeout";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -71,6 +72,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private CheckBoxPreference mVolumeWake;
+    private ListPreference mPeekPickupTimeout;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -125,6 +127,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
         mNotificationPeek.setPersistent(false);
+
+        // Peek pickup timeout
+        mPeekPickupTimeout = (ListPreference) getPreferenceScreen()
+                .findPreference(KEY_PEEK_PICKUP_TIMEOUT);
+        int peekTimeout = Settings.System.getInt(getContentResolver(),
+                Settings.System.PEEK_PICKUP_TIMEOUT, 10000);
+        mPeekPickupTimeout.setValue(String.valueOf(peekTimeout));
+        mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntry());
+        mPeekPickupTimeout.setOnPreferenceChangeListener(this);
 
         mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
@@ -371,7 +382,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.VOLUME_WAKE_SCREEN,
                     (Boolean) objValue ? 1 : 0);
         }
-        return true;
+        if (preference == mPeekPickupTimeout) {
+            int index = mPeekPickupTimeout.findIndexOfValue((String) objValue);
+            int peekTimeout = Integer.valueOf((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.PEEK_PICKUP_TIMEOUT, peekTimeout);
+            mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntries()[index]);
+            return true;
+        }
+        return false;
     }
 
     @Override
