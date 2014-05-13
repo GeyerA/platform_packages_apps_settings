@@ -58,6 +58,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_LED_SETTINGS = "led_settings";
     private static final String KEY_PEEK = "notification_peek";
+    private static final String KEY_PEEK_PICKUP_TIMEOUT = "peek_pickup_timeout";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -71,6 +72,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
     private PreferenceScreen mLedSettings;
+    private ListPreference mPeekPickupTimeout;
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
@@ -118,6 +120,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
         mNotificationPeek.setPersistent(false);
+
+        // Peek pickup timeout
+        mPeekPickupTimeout = (ListPreference) getPreferenceScreen()
+                .findPreference(KEY_PEEK_PICKUP_TIMEOUT);
+        int peekTimeout = Settings.System.getInt(getContentResolver(),
+                Settings.System.PEEK_PICKUP_TIMEOUT, 10000);
+        mPeekPickupTimeout.setValue(String.valueOf(peekTimeout));
+        mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntry());
+        mPeekPickupTimeout.setOnPreferenceChangeListener(this);
 
         // Led settings
         mLedSettings = (PreferenceScreen) findPreference(KEY_LED_SETTINGS);
@@ -347,8 +358,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.VOLUME_WAKE_SCREEN,
                     (Boolean) objValue ? 1 : 0);
+            return true;
         }
-        return true;
+        if (preference == mPeekPickupTimeout) {
+            int index = mPeekPickupTimeout.findIndexOfValue((String) objValue);
+            int peekTimeout = Integer.valueOf((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.PEEK_PICKUP_TIMEOUT, peekTimeout);
+            mPeekPickupTimeout.setSummary(mPeekPickupTimeout.getEntries()[index]);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -364,4 +384,5 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         return false;
     }
 }
+
 

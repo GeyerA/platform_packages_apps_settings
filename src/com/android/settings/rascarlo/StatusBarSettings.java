@@ -1,4 +1,3 @@
-
 package com.android.settings.rascarlo;
 
 import android.content.ContentResolver;
