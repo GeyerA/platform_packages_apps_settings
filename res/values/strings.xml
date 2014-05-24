@@ -5151,4 +5151,9 @@
     <string name="peek_wake_20seconds">20 seconds</string>
     <string name="peek_wake_30seconds">30 seconds</string>
 
+    <!--Blacklist-->
+    <string name="blacklist_button_title">Blacklist</string>
+    <string name="peek_blacklist_label">Blacklist from Peek</string>
+    <string name="floating_blacklist_label">Blacklist from Floating Mode</string>
+
 </resources>
