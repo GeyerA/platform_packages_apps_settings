@@ -16,6 +16,20 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
+
+      <PreferenceCategory
+              android:key="etc_category"
+              android:title="@string/etc_category_title" >
+
+      <PreferenceScreen
+              android:key="DPI"
+              android:title="@string/dpi_category" >
+              <intent android:targetPackage="com.android.settings"
+                               android:targetClass="com.android.settings.dokdo.DPI_Settings" />
+      </PreferenceScreen>
+
+      </PreferenceCategory>
+
     <com.android.settings.BugreportPreference
             android:key="bugreport"
             android:title="@*android:string/bugreport_title"

@@ -1632,6 +1632,9 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
+        <!-- Dokdo -->
+        <activity android:name=".dokdo.DPI_Settings" />
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
