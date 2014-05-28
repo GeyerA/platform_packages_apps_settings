@@ -5113,4 +5113,24 @@
     <string name="clock_use_second">Use second clock</string>
     <string name="clock_use_second_summary">Show second in clock</string>
 
+    <string name="etc_category_title">Etc</string>
+
+    <!-- DPI Tool -->
+    <string name="dpi_category">DPI</string>
+    <string name="current_dpi">Current DPI</string>
+    <string name="dpi_category">DPI</string>
+    <string name="dpi_ldpi">Proper DPI for this device is 0~120.</string>
+    <string name="dpi_mdpi">Proper DPI for this device is 120~160.</string>
+    <string name="dpi_hdpi">Proper DPI for this device is 160~240.</string>
+    <string name="dpi_xhdpi">Proper DPI for this device is 240~320.</string>
+    <string name="dpi_xxhdpi">Proper DPI for this device is 320~640.</string>
+    <string name="dpi_msg1">Successfully changed DPI from</string>
+    <string name="dpi_msg2">to</string>
+    <string name="dpi_msg3">.</string>
+    <string name="dpi_need_reboot">You need to reboot to successfully change DPI.</string>
+    <string name="dpi_null">Please enter DPI</string>
+    <string name="dpi_reboot">Auto reboot</string>
+    <string name="dpi_sucess">Display density successfully applied. \n\n Please reboot.</string>
+    <string name="dpi_warning">*WARNING*\n\n\n warranty is now void. \n\nEnter DPI and press Button. You need to reboot to apply DPI.</string>
+
 </resources>
