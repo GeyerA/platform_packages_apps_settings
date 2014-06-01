@@ -5109,4 +5109,8 @@
     <string name="peek_wake_20seconds">20 seconds</string>
     <string name="peek_wake_30seconds">30 seconds</string>
 
+        <!-- Statusbar Second Clock -->
+    <string name="clock_use_second">Use second clock</string>
+    <string name="clock_use_second_summary">Show second in clock</string>
+
 </resources>
