@@ -25,7 +25,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -57,10 +60,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    private static final String KEY_PEEK = "notification_peek";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private CheckBoxPreference mAccelerometer;
+    private CheckBoxPreference mNotificationPeek;
     private WarnedListPreference mFontSizePref;
     private PreferenceCategory mLightOptions;
     private PreferenceScreen mNotificationPulse;
@@ -117,6 +122,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
+
+        mNotificationPeek = (CheckBoxPreference) findPreference(KEY_PEEK);
+        mNotificationPeek.setPersistent(false);
 
         mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
@@ -281,6 +289,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
+        updatePeekCheckbox();
     }
 
     private void updateScreenSaverSummary() {
@@ -294,6 +303,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (getActivity() == null) return;
 
         mAccelerometer.setChecked(!RotationPolicy.isRotationLocked(getActivity()));
+    }
+
+    private void updatePeekCheckbox() {
+        boolean enabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.PEEK_STATE, 0) == 1;
+        mNotificationPeek.setChecked(enabled);
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -328,6 +343,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mAccelerometer) {
             RotationPolicy.setRotationLockForAccessibility(
                     getActivity(), !mAccelerometer.isChecked());
+        } else if (preference == mNotificationPeek) {
+            Settings.System.putInt(getContentResolver(), Settings.System.PEEK_STATE,
+                    mNotificationPeek.isChecked() ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

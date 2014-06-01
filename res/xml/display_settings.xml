@@ -105,4 +105,14 @@
         android:summary="@string/lockscreen_notifications_summary">
         </PreferenceScreen>
 
+        <!-- Notifications -->
+        <PreferenceCategory
+            android:key="notification_category"
+            android:title="@string/notification_category"/>
+
+        <CheckBoxPreference
+            android:key="notification_peek"
+            android:title="@string/notification_peek_title"
+            android:summary="@string/notification_peek_summary" />
+
 </PreferenceScreen>

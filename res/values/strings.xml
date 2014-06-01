@@ -5088,4 +5088,11 @@
     <string name="app_circle_bar_included_apps_summary">Apps will show in app sidebar</string>
     <string name="category_app_circle_bar_title">App launcher</string>
 
+    <!--Notification category-->
+    <string name="notification_category">Notifications</string>
+
+    <!--Notification peek-->
+    <string name="notification_peek_title">Notification peek</string>
+    <string name="notification_peek_summary">Show latest notification after picking up your device</string>
+
 </resources>
