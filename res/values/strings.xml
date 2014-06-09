@@ -4910,7 +4910,6 @@
     <!-- DPI Tool -->
     <string name="dpi_category">DPI</string>
     <string name="current_dpi">Current DPI</string>
-    <string name="dpi_category">DPI</string>
     <string name="dpi_ldpi">Proper DPI for this device is 0~120.</string>
     <string name="dpi_mdpi">Proper DPI for this device is 120~160.</string>
     <string name="dpi_hdpi">Proper DPI for this device is 160~240.</string>
