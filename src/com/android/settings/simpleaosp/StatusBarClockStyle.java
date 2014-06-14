@@ -60,6 +60,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private static final String PREF_CLOCK_DATE_STYLE = "clock_date_style";
     private static final String PREF_CLOCK_DATE_FORMAT = "clock_date_format";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String CLOCK_USE_SECOND = "clock_use_second";
 
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
@@ -76,6 +77,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateStyle;
     private ListPreference mClockDateFormat;
     private SwitchPreference mStatusBarClock;
+    private CheckBoxPreference mClockUseSecond;
 
     private boolean mCheckPreferences;
 
@@ -123,6 +125,10 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             mClockAmPmStyle.setSummary(mClockAmPmStyle.getEntry());
         }
         mClockAmPmStyle.setEnabled(!is24hour);
+
+         mClockUseSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+         mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.CLOCK_USE_SECOND, 0) == 1));
 
         mColorPicker = (ColorPickerPreference) findPreference(PREF_COLOR_PICKER);
         mColorPicker.setOnPreferenceChangeListener(this);
@@ -280,6 +286,18 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             return true;
         }
         return false;
+    }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+        boolean value;
+        if (preference == mClockUseSecond) {
+            value = mClockUseSecond.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.CLOCK_USE_SECOND, value ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
