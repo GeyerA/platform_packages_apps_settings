@@ -116,8 +116,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             if (!getResources().getBoolean(
                 com.android.internal.R.bool.config_intrusiveNotificationLed)) {
                 getPreferenceScreen().removePreference(mLedSettings);
-            } else {
-                updateLightPulseDescription();
+                mLedSettings = null;
             }
         }
 
@@ -242,8 +241,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
-
         updateState();
+        if (mLedSettings != null) {
+            updateLightPulseDescription();
+        }
     }
 
     @Override
