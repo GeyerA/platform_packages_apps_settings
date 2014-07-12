@@ -21,17 +21,10 @@ import com.android.settings.SettingsPreferenceFragment;
 public class StatusBarSettings extends SettingsPreferenceFragment implements
 OnPreferenceChangeListener {
 
-
-    // Quick Pulldown
-    private static final String QUICK_PULLDOWN = "quick_pulldown";
-
     // Network Traffic
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
     private static final String NETWORK_TRAFFIC_PERIOD = "network_traffic_period";
-
-    // Quick Pulldown
-    private ListPreference mQuickPulldown;
 
     // Network Traffic
     private ListPreference mNetTrafficState;
@@ -51,15 +44,6 @@ OnPreferenceChangeListener {
         addPreferencesFromResource(R.xml.status_bar_settings);
 
         loadResources();
-
-        // Quick Settings pull down
-        mQuickPulldown = (ListPreference) getPreferenceScreen().findPreference(QUICK_PULLDOWN);
-        mQuickPulldown.setOnPreferenceChangeListener(this);
-        int quickPulldownValue = Settings.System.getInt(getActivity().getApplicationContext()
-                .getContentResolver(),
-                Settings.System.QS_QUICK_PULLDOWN, 0);
-        mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
-        updatePulldownSummary(quickPulldownValue);
 
             // Network Traffic
             mNetTrafficState = (ListPreference) getPreferenceScreen().findPreference(NETWORK_TRAFFIC_STATE);
@@ -110,13 +94,7 @@ OnPreferenceChangeListener {
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mQuickPulldown) {
-            int quickPulldownValue = Integer.valueOf((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
-            updatePulldownSummary(quickPulldownValue);
-
-        } else if (preference == mNetTrafficState) {
+            if (preference == mNetTrafficState) {
             int intState = Integer.valueOf((String)objValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UP, getBit(intState, MASK_UP));
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_DOWN, getBit(intState, MASK_DOWN));
