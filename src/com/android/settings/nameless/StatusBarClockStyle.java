@@ -37,6 +37,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private static final String PREF_CLOCK_DATE_DISPLAY = "statusbar_clock_date_display";
     private static final String PREF_CLOCK_DATE_STYLE = "statusbar_clock_date_style";
     private static final String PREF_CLOCK_DATE_FORMAT = "statusbar_clock_date_format";
+    private static final String CLOCK_USE_SECOND = "clock_use_second";
 
     public static final int CLOCK_DATE_STYLE_LOWERCASE = 1;
     public static final int CLOCK_DATE_STYLE_UPPERCASE = 2;
@@ -47,6 +48,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateDisplay;
     private ListPreference mClockDateStyle;
     private ListPreference mClockDateFormat;
+    private CheckBoxPreference mClockUseSecond;
 
     private boolean mCheckPreferences;
 
@@ -79,6 +81,10 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         mClockAmPmStyle.setValue(Integer.toString(Settings.System.getInt(resolver,
                 Settings.System.STATUSBAR_CLOCK_AM_PM_STYLE, 0)));
         mClockAmPmStyle.setSummary(mClockAmPmStyle.getEntry());
+
+        mClockUseSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+        mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.CLOCK_USE_SECOND, 0) == 1));
 
         mClockDateDisplay = (ListPreference) findPreference(PREF_CLOCK_DATE_DISPLAY);
         mClockDateDisplay.setOnPreferenceChangeListener(this);
@@ -209,6 +215,18 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             return true;
         }
         return false;
+    }
+
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+        boolean value;
+        if (preference == mClockUseSecond) {
+            value = mClockUseSecond.isChecked();
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.CLOCK_USE_SECOND, value ? 1 : 0);
+            return true;
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void parseClockDateFormats() {
