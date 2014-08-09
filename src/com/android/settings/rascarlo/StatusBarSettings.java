@@ -115,6 +115,7 @@ OnPreferenceChangeListener {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.QS_QUICK_PULLDOWN, quickPulldownValue);
             updatePulldownSummary(quickPulldownValue);
+            return true;
 
         } else if (preference == mNetTrafficState) {
             int intState = Integer.valueOf((String)objValue);
@@ -130,12 +131,16 @@ OnPreferenceChangeListener {
                 mNetTrafficUnit.setEnabled(true);
                 mNetTrafficPeriod.setEnabled(true);
             }
+            return true;
+
         } else if (preference == mNetTrafficUnit) {
             // 1 = Display as Byte/s; default is bit/s
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UNIT, ((String)objValue).equals("1"));
             Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NETWORK_TRAFFIC_STATE, mNetTrafficVal);
             int index = mNetTrafficUnit.findIndexOfValue((String) objValue);
             mNetTrafficUnit.setSummary(mNetTrafficUnit.getEntries()[index]);
+            return true;
+
         } else if (preference == mNetTrafficPeriod) {
             int intState = Integer.valueOf((String)objValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_PERIOD, false) + (intState << 16);
