@@ -150,6 +150,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private static final int RESULT_DEBUG_APP = 1000;
 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+
     private IWindowManager mWindowManager;
     private IBackupManager mBackupManager;
     private DevicePolicyManager mDpm;
@@ -202,6 +204,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private CheckBoxPreference mShowAllANRs;
 
+    private CheckBoxPreference mKillAppLongpressBack;
     private CheckBoxPreference mAdvancedReboot;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
@@ -316,6 +319,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
+        mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
 
         Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
         if (selectRuntime != null) {
@@ -441,6 +445,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
         mEnabledSwitch.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
+        updateKillAppLongpressBackOptions();
 
         if (mHaveDebugSettings && !mLastEnabledState) {
             // Overall debugging is disabled, but there are some debug
@@ -612,6 +617,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             hdcpChecking.setSummary(summaries[index]);
             hdcpChecking.setOnPreferenceChangeListener(this);
         }
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }
 
     private void updatePasswordSummary() {
@@ -1294,6 +1310,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeWifiDisplayCertificationOptions();
         } else if (preference == mAdvancedReboot) {
             writeAdvancedRebootOptions();
+        } else if (preference == mKillAppLongpressBack) {
+            writeKillAppLongpressBackOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
