@@ -5195,4 +5195,9 @@
     <!-- Kernel Tweaker -->
     <string name="kernel_tweaker_title">Kernel Tweaker</string>
 
+    <!-- Advanced battery info -->
+    <string name="eos_battery_info_title">Advanced battery info</string>
+    <string name="eos_battery_info_time_screen_on">Time with screen on:</string>
+    <string name="eos_battery_info_deep_sleep">Time in deep sleep:</string>
+
 </resources>

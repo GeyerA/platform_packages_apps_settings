@@ -39,6 +39,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 
 import com.android.internal.os.PowerProfile;
+import com.android.settings.BatteryInfo;
 import com.android.settings.HelpUtils;
 import com.android.settings.R;
 
@@ -66,6 +67,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int SUBMENU_BATTERY_CIRCLE_PERCENT = Menu.FIRST + 6;
     private static final int SUBMENU_BATTERY_HIDDEN         = Menu.FIRST + 7;
     private static final int MENU_HELP                      = Menu.FIRST + 8;
+    private static final int MENU_ADVANCED_BATTERY          = Menu.FIRST + 9;
 
     private PreferenceGroup mAppListGroup;
     private Preference mBatteryStatusPref;
@@ -188,6 +190,9 @@ public class PowerUsageSummary extends PreferenceFragment {
         batteryIcon.setIcon(R.drawable.ic_settings_battery)
                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
+        menu.add(Menu.NONE, MENU_ADVANCED_BATTERY, 0, R.string.eos_battery_info_title)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
             final MenuItem help = menu.add(0, MENU_HELP, 0, R.string.help_label);
@@ -234,6 +239,11 @@ public class PowerUsageSummary extends PreferenceFragment {
                 item.setChecked(true);
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_BATTERY_STYLE, 4);
+                return true;
+            case MENU_ADVANCED_BATTERY:
+                final Context mCtx = getActivity();
+                Intent intent = new Intent(mCtx, BatteryInfo.class);
+                mCtx.startActivity(intent);
                 return true;
             default:
                 return false;

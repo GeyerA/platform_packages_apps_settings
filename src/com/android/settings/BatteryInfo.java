@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2014 TeamEOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +17,8 @@
 
 package com.android.settings;
 
+import java.util.concurrent.TimeUnit;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -27,14 +30,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IPowerManager;
 import android.os.Message;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.internal.app.IBatteryStats;
+import com.android.internal.os.BatteryStatsImpl;
+import com.android.internal.os.PowerProfile;
+
+import com.android.settings.fuelgauge.BatteryStatsHelper;
 
 public class BatteryInfo extends Activity {
+    private static final String TAG = BatteryInfo.class.getSimpleName();
+    private static final int EVENT_TICK = 1;
+    private int mStatsType;
+    private long uSecTime;
+    private long uSecNow;
+    private long screenOnTimeMs;
+    private long deepSleepTime;
     private TextView mStatus;
     private TextView mPower;
     private TextView mLevel;
@@ -44,11 +61,13 @@ public class BatteryInfo extends Activity {
     private TextView mTemperature;
     private TextView mTechnology;
     private TextView mUptime;
+    private TextView mScreenTime;
+    private TextView mDeepSleep;
     private IBatteryStats mBatteryStats;
     private IPowerManager mScreenStats;
-    
-    private static final int EVENT_TICK = 1;
-    
+    private BatteryStatsImpl mStats;
+    private IBatteryStats mBatteryInfo;
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -56,7 +75,7 @@ public class BatteryInfo extends Activity {
                 case EVENT_TICK:
                     updateBatteryStats();
                     sendEmptyMessageDelayed(EVENT_TICK, 1000);
-                    
+
                     break;
             }
         }
@@ -91,7 +110,7 @@ public class BatteryInfo extends Activity {
                 mTemperature.setText("" + tenthsToFixedString(intent.getIntExtra("temperature", 0))
                         + getString(R.string.battery_info_temperature_units));
                 mTechnology.setText("" + intent.getStringExtra("technology"));
-                
+
                 mStatus.setText(Utils.getBatteryStatus(getResources(), intent));
 
                 switch (plugType) {
@@ -114,7 +133,7 @@ public class BatteryInfo extends Activity {
                         mPower.setText(getString(R.string.battery_info_power_unknown));
                         break;
                 }
-                
+
                 int health = intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 String healthString;
                 if (health == BatteryManager.BATTERY_HEALTH_GOOD) {
@@ -142,6 +161,7 @@ public class BatteryInfo extends Activity {
         super.onCreate(icicle);
 
         setContentView(R.layout.battery_info);
+        updateTimeStats();
 
         // create the IntentFilter that will be used to listen
         // to battery status broadcasts
@@ -162,13 +182,15 @@ public class BatteryInfo extends Activity {
         mVoltage = (TextView)findViewById(R.id.voltage);
         mTemperature = (TextView)findViewById(R.id.temperature);
         mUptime = (TextView) findViewById(R.id.uptime);
-        
+        mScreenTime = (TextView) findViewById(R.id.screentime);
+        mDeepSleep = (TextView) findViewById(R.id.deepsleep);
+
         // Get awake time plugged in and on battery
         mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService(
                 BatteryStats.SERVICE_NAME));
         mScreenStats = IPowerManager.Stub.asInterface(ServiceManager.getService(POWER_SERVICE));
         mHandler.sendEmptyMessageDelayed(EVENT_TICK, 1000);
-        
+
         registerReceiver(mIntentReceiver, mIntentFilter);
     }
 
@@ -176,7 +198,7 @@ public class BatteryInfo extends Activity {
     public void onPause() {
         super.onPause();
         mHandler.removeMessages(EVENT_TICK);
-        
+
         // we are no longer on the screen stop the observers
         unregisterReceiver(mIntentReceiver);
     }
@@ -185,5 +207,66 @@ public class BatteryInfo extends Activity {
         long uptime = SystemClock.elapsedRealtime();
         mUptime.setText(DateUtils.formatElapsedTime(uptime / 1000));
     }
-    
+
+    private void updateTimeStats() {
+        try {
+            mBatteryInfo = IBatteryStats.Stub.asInterface(
+                ServiceManager.getService(BatteryStats.SERVICE_NAME));
+            byte[] data = mBatteryInfo.getStatistics();
+            Parcel parcel = Parcel.obtain();
+            parcel.unmarshall(data, 0, data.length);
+            parcel.setDataPosition(0);
+            mStats = com.android.internal.os.BatteryStatsImpl.CREATOR
+                    .createFromParcel(parcel);
+            mStats.distributeWorkLocked(BatteryStats.STATS_SINCE_CHARGED);
+
+            mStatsType = BatteryStats.STATS_SINCE_CHARGED;
+            uSecTime = SystemClock.elapsedRealtime() * 1000;
+            uSecNow = mStats.computeBatteryRealtime(uSecTime, mStatsType);
+            screenOnTimeMs = mStats.getScreenOnTime(uSecNow, mStatsType) / 1000;
+            deepSleepTime = ((SystemClock.elapsedRealtime()) - (SystemClock.uptimeMillis()));
+
+            if (deepSleepTime <= 0) {
+                deepSleepTime = 0;
+            }
+
+            mScreenTime = (TextView) findViewById(R.id.screentime);
+            mDeepSleep = (TextView) findViewById(R.id.deepsleep);
+            mScreenTime.setText(getDurationBreakdown(screenOnTimeMs));
+            mDeepSleep.setText(getDurationBreakdown(deepSleepTime));
+        } catch (RemoteException e) {
+            Log.e(TAG, "RemoteException:", e);
+        }
+    }
+
+    /**
+     * Convert a millisecond duration to a string format
+     * 
+     * @param millis A duration to convert to a string form
+     * @return A string of the form "X Hours Y Minutes Z Seconds".
+     */
+    public static String getDurationBreakdown(long millis)
+    {
+        if(millis < 0)
+        {
+            throw new IllegalArgumentException("Duration must be greater than zero!");
+        }
+
+        long hours = TimeUnit.MILLISECONDS.toHours(millis);
+        millis -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+
+        StringBuilder sb = new StringBuilder(64);
+        sb.append(hours);
+        sb.append(" h ");
+        sb.append(minutes);
+        sb.append(" m ");
+        sb.append(seconds);
+        sb.append(" s");
+
+        return(sb.toString());
+    }
+
 }

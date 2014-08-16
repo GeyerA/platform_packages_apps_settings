@@ -74,5 +74,15 @@
         <TextView android:id="@+id/uptime" style="@style/info_value" />
     </LinearLayout>
 
-</LinearLayout>
+    <!-- Ontime -->
+    <LinearLayout style="@style/entry_layout">
+        <TextView android:text="@string/eos_battery_info_time_screen_on" style="@style/info_label" />
+        <TextView android:id="@+id/screentime" style="@style/info_value" />
+    </LinearLayout>
 
+    <!-- Deep sleep -->
+    <LinearLayout style="@style/entry_layout">
+        <TextView android:text="@string/eos_battery_info_deep_sleep" style="@style/info_label" />
+        <TextView android:id="@+id/deepsleep" style="@style/info_value" />
+    </LinearLayout>
+</LinearLayout>
