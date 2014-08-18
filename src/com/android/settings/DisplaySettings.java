@@ -72,6 +72,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String ROTATION_ANGLE_180 = "180";
     private static final String ROTATION_ANGLE_270 = "270";
 
+    private static final String KEY_TOUCH_CONTROL_SETTINGS = "touch_control_settings";
+    private static final String KEY_TOUCH_CONTROL_PACKAGE_NAME = "com.mahdi.touchcontrol";
+
     private PreferenceScreen mDisplayRotationPreference;
     private CheckBoxPreference mNotificationPeek;
     private WarnedListPreference mFontSizePref;
@@ -85,6 +88,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mPeekPickupTimeout;
     private ListPreference mPeekWakeTimeout;
     private PreferenceScreen mScreenColorSettings;
+    private PreferenceScreen mTouchControl;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -166,6 +170,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
         if (!isPostProcessingSupported()) {
             getPreferenceScreen().removePreference(mScreenColorSettings);
+        }
+
+        mTouchControl = (PreferenceScreen) findPreference(KEY_TOUCH_CONTROL_SETTINGS);
+        if (!Utils.isPackageInstalled(getActivity(), KEY_TOUCH_CONTROL_PACKAGE_NAME)) {
+            advancedPrefs.removePreference(mTouchControl);
         }
 
     }
