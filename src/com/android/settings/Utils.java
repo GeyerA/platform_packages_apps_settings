@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -646,5 +647,22 @@ public class Utils {
 
     public static boolean isTablet(Context con) {
         return getScreenType(con) == DEVICE_TABLET;
+    }
+
+
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        if (pkg == null) {
+            return false;
+        }
+        try {
+            PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+            if (!pi.applicationInfo.enabled) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NameNotFoundException e) {
+            return false;
+        }
     }
 }
