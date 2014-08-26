@@ -5191,8 +5191,4 @@
     <!-- Lockscreen battery ring -->
     <string name="battery_around_lockscreen_ring">Battery around unlock ring</string>
 
-    <!-- Touch control -->
-    <string name="touch_control_settings_title">Advanced</string>
-    <string name="touch_control_settings_summary">Manage advance wakeup option including double tap to wake and more</string>
-
 </resources>
