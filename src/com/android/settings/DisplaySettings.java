@@ -44,7 +44,6 @@ import android.util.Log;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 import com.android.settings.simpleaosp.DisplayRotation;
-import com.android.settings.Utils;
 
 import java.util.ArrayList;
 
@@ -175,7 +174,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         mTouchControl = (PreferenceScreen) findPreference(KEY_TOUCH_CONTROL_SETTINGS);
         if (!Utils.isPackageInstalled(getActivity(), KEY_TOUCH_CONTROL_PACKAGE_NAME)) {
-            getPreferenceScreen().removePreference(mTouchControl);
+            advancedPrefs.removePreference(mTouchControl);
         }
 
     }
