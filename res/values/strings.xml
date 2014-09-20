@@ -5103,6 +5103,7 @@
      <string name="battery_bar_percent">Battery bar &amp; percent</string>
      <string name="battery_circle">Battery circle</string>
      <string name="battery_circle_percent">Battery circle &amp; percent</string>
+     <string name="battery_hidden">Hidden</string>
 
         <!-- Statusbar Second Clock -->
     <string name="clock_use_second">Use second clock</string>
