@@ -1938,6 +1938,9 @@
         <activity android:name=".rastapop.SystemSettings" />
         <!-- BUILD TWEAKS END -->
 
+        <activity android:name=".notificationlight.NotificationLightSettings" />
+        <activity android:name=".notificationlight.BatteryLightSettings" />
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
