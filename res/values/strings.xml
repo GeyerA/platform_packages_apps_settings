@@ -6170,7 +6170,6 @@
     <string name="show_network_traffic_1000">1000 ms</string>
     <string name="show_network_traffic_1500">1500 ms</string>
     <string name="show_network_traffic_2000">2000 ms</string>
-
     <string name="show_activity_indicators_on_status_bar_title">Activity indicators</string>
     <string name="show_activity_indicators_on_status_bar_summary">Show indicators in signal bars</string>
 
@@ -6203,4 +6202,12 @@
 
    <!-- Generic strings -->
    <string name="font_size_sample">Sample</string>
+
+    <!-- Recents panel settings -->
+    <string name="recents_panel_settings">Recents panel settings</string>
+    <string name="show_clear_all_recents_button_title">Clear all recents button</string>
+    <string name="show_clear_all_recents_button_summary">Show clear all button on recents panel</string>
+    <string name="recents_clear_all_location_title">Clear all recents location</string>
+    <string name="recents_clear_all_location_right">Top right</string>
+    <string name="recents_clear_all_location_left">Top left</string>
 </resources>
