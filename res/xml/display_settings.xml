@@ -62,6 +62,17 @@
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
 
+    <PreferenceCategory
+	android:key="battery_icons_category"
+        android:title="@string/status_bar_battery_style_category" >
+
+    <PreferenceScreen
+        android:fragment="com.android.settings.simpleaosp.BatterySettings"
+        android:key="battery_style_pref"
+        android:title="@string/status_bar_battery_title"
+    	android:summary="@string/status_bar_battery_summary" />
+    </PreferenceCategory> 
+
         <SwitchPreference
                 android:key="lift_to_wake"
                 android:title="@string/lift_to_wake_title"
