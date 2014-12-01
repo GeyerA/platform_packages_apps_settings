@@ -24,7 +24,6 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -78,7 +77,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateStyle;
     private ListPreference mClockDateFormat;
     private SwitchPreference mStatusBarClock;
-    private CheckBoxPreference mClockUseSecond;
+    private SwitchPreference mClockUseSecond;
 
     private boolean mCheckPreferences;
 
@@ -127,9 +126,10 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         }
         mClockAmPmStyle.setEnabled(!is24hour);
 
-         mClockUseSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+         mClockUseSecond = (SwitchPreference) prefSet.findPreference(CLOCK_USE_SECOND);
          mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.CLOCK_USE_SECOND, 0) == 1));
+                Settings.System.CLOCK_USE_SECOND, 1) == 1));
+        mClockUseSecond.setOnPreferenceChangeListener(this);
 
         mColorPicker = (ColorPickerPreference) findPreference(PREF_COLOR_PICKER);
         mColorPicker.setOnPreferenceChangeListener(this);
@@ -240,6 +240,11 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
                     Settings.System.STATUS_BAR_CLOCK,
                     (Boolean) newValue ? 1 : 0);
             return true;
+        } else if (preference == mClockUseSecond) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.CLOCK_USE_SECOND,
+                    (Boolean) newValue ? 1 : 0);
+            return true;
         } else if (preference == mClockDateFormat) {
             int index = mClockDateFormat.findIndexOfValue((String) newValue);
 
@@ -287,18 +292,6 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
             return true;
         }
         return false;
-    }
-
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
-        boolean value;
-        if (preference == mClockUseSecond) {
-            value = mClockUseSecond.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.CLOCK_USE_SECOND, value ? 1 : 0);
-            return true;
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
