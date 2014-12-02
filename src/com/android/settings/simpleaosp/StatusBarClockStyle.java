@@ -126,9 +126,9 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         }
         mClockAmPmStyle.setEnabled(!is24hour);
 
-         mClockUseSecond = (SwitchPreference) prefSet.findPreference(CLOCK_USE_SECOND);
-         mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.CLOCK_USE_SECOND, 1) == 1));
+        mClockUseSecond = (SwitchPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+        mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.CLOCK_USE_SECOND, 0) == 1));
         mClockUseSecond.setOnPreferenceChangeListener(this);
 
         mColorPicker = (ColorPickerPreference) findPreference(PREF_COLOR_PICKER);
