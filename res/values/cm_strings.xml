@@ -1395,6 +1395,17 @@
     <string name="setup_lock_pattern_size_title">Pattern complexity</string>
     <string name="setup_lock_pattern_size_details">How many nodes would you like to use with your pattern? The more nodes, the more complex the pattern can be.</string>
 
+    <!-- Host File Manager -->
+    <string name="hfm_disable_ads_title">Disable Ads</string>
+    <string name="hfm_disable_ads_summary">Change hosts file to disable ads</string>
+    <string name="hfm_pref_screen_title">Ad blocker</string>
+    <string name="hfm_update_hosts">Update hosts file</string>
+    <string name="hfm_update_hosts_summary">Download and apply fresh hosts</string>
+    <string name="hfm_dialog_wait">Working, please wait...</string>
+    <string name="hfm_dialog_failed">Updating hosts file failed. Please try again.</string>
+    <string name="hfm_dialog_success">/4 hosts sources successfully applied!</string>
+    <string name="hfm_dialog_conn_error">Error: No network connectivity</string>
+
     <!-- LTO download data over wi-fi only -->
     <string name="lto_download_data_wifi_only">GPS assisted data download</string>
     <string name="lto_download_data_wifi_only_on">Over any networks</string>
@@ -1422,4 +1433,5 @@
                  <b>Last update:</b> <xliff:g id="date">%3$s</xliff:g>]]></string>
 
     <string name="quick_settings_reset_message">Reset quick settings tiles?</string>
+
 </resources>
