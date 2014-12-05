@@ -71,12 +71,10 @@
             android:key="volume_rocker_wake"
             android:summary="@string/volume_rocker_wake_summary"
             android:title="@string/volume_rocker_wake_title" />
-
         <SwitchPreference
             android:key="volume_key_adjust_sound"
             android:summary="@string/volume_key_adjust_sound_summary"
             android:title="@string/volume_key_adjust_sound_title" />
-
         <ListPreference
             android:dialogTitle="@string/volume_key_cursor_control_title"
             android:entries="@array/volume_key_cursor_control_entries"
@@ -89,15 +87,17 @@
     <PreferenceCategory
         android:key="system_settings_general_category"
         android:title="@string/system_settings_screen_title" >
+        <PreferenceScreen
+                android:key="hfm_settings"
+                android:title="@string/hfm_pref_screen_title"
+                android:fragment="com.android.settings.rastapop.hfm.HfmSettings" />
         <SwitchPreference
             android:key="advanced_reboot"
             android:summary="@string/advanced_reboot_summary"
             android:title="@string/advanced_reboot_title" />
-
         <SwitchPreference
             android:key="kill_app_longpress_back"
             android:title="@string/kill_app_longpress_back"
             android:summary="@string/kill_app_longpress_back_summary"/>
     </PreferenceCategory>
-
 </PreferenceScreen>
