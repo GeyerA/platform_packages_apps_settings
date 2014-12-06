@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.TrafficStats;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -20,6 +21,7 @@ import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.util.Helpers;
 
 public class SystemSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -49,6 +51,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
     private static final String NETWORK_TRAFFIC_PERIOD = "network_traffic_period";
 
+    // LockClock
+    private static final String KEY_LOCKCLOCK = "lock_clock";
+    // Package name of the cLock app
+    public static final String LOCKCLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
+
     // status bar native battery percentage
     private SwitchPreference mStatusBarNativeBatteryPercentage;
     // status bar brightness control
@@ -69,6 +76,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private ListPreference mNetTrafficState;
     private ListPreference mNetTrafficUnit;
     private ListPreference mNetTrafficPeriod;
+    // LockClock
+    private Preference mLockClock;
 
     private int mNetTrafficVal;
     private int MASK_UP;
@@ -82,6 +91,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_settings);
         loadResources();
+        PackageManager pm = getPackageManager();
 
         // status bar native battery percentage
         mStatusBarNativeBatteryPercentage = (SwitchPreference) findPreference(STATUS_BAR_NATIVE_BATTERY_PERCENTAGE);
@@ -185,6 +195,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements
                 getPreferenceScreen().removePreference(findPreference(NETWORK_TRAFFIC_PERIOD));
             }
 
+        // cLock app check
+        mLockClock = (Preference) getPreferenceScreen()
+                .findPreference(KEY_LOCKCLOCK);
+        if (!Helpers.isPackageInstalled(LOCKCLOCK_PACKAGE_NAME, pm)) {
+            getPreferenceScreen().removePreference(mLockClock);
+        }
     }
 
     @Override
