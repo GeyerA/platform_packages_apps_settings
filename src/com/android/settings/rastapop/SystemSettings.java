@@ -30,6 +30,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_NATIVE_BATTERY_PERCENTAGE = "status_bar_native_battery_percentage";
     // status bar brightness control
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+    // status bar power menu
+    private static final String STATUS_BAR_POWER_MENU = "status_bar_power_menu";
 
     // navigation bar height
     private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
@@ -60,6 +62,8 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mStatusBarNativeBatteryPercentage;
     // status bar brightness control
     private SwitchPreference mStatusBarBrightnessControl;
+    // status bar power menu
+    private ListPreference mStatusBarPowerMenu;
     // navigation bar height
     private ListPreference mNavigationBarHeight;
     // volume rocker wake
@@ -115,6 +119,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         } catch (SettingNotFoundException e) {
             // what do you expect me to do?
         }
+
+        // status bar power menu
+        mStatusBarPowerMenu = (ListPreference) findPreference(STATUS_BAR_POWER_MENU);
+        mStatusBarPowerMenu.setOnPreferenceChangeListener(this);
+        int statusBarPowerMenu = Settings.System.getInt(getContentResolver(),
+                STATUS_BAR_POWER_MENU, 0);
+        mStatusBarPowerMenu.setValue(String.valueOf(statusBarPowerMenu));
+        mStatusBarPowerMenu.setSummary(mStatusBarPowerMenu.getEntry());
 
         // navigation bar height
         mNavigationBarHeight = (ListPreference) findPreference(NAVIGATION_BAR_HEIGHT);
@@ -219,6 +231,19 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), STATUS_BAR_BRIGHTNESS_CONTROL,
                     value ? 1 : 0);
+            return true;
+        }
+
+        // status bar power menu
+        else if (preference == mStatusBarPowerMenu) {
+            String statusBarPowerMenu = (String) objValue;
+            int statusBarPowerMenuValue = Integer.parseInt(statusBarPowerMenu);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_POWER_MENU, statusBarPowerMenuValue);
+            int statusBarPowerMenuIndex = mStatusBarPowerMenu
+                    .findIndexOfValue(statusBarPowerMenu);
+            mStatusBarPowerMenu
+                    .setSummary(mStatusBarPowerMenu.getEntries()[statusBarPowerMenuIndex]);
             return true;
         }
 
