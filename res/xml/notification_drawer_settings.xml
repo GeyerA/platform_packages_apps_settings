@@ -33,6 +33,12 @@
             android:defaultValue="true" />
 
         <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="quick_settings_vibrate"
+            android:title="@string/quick_settings_vibrate_title"
+            android:summary="@string/quick_settings_vibrate_summary"
+            android:defaultValue="false"/>
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
             android:key="qs_show_brightness_slider"
             android:title="@string/qs_brightness_slider_title"
             android:defaultValue="true"/>
@@ -50,11 +56,5 @@
             android:defaultValue="false" />
 
     </PreferenceCategory>
-
-    <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-        android:key="qs_location_advanced"
-        android:title="@string/qs_advanced_location_title"
-        android:summary="@string/qs_advanced_location_summary"
-        android:defaultValue="false" />
 
 </PreferenceScreen>

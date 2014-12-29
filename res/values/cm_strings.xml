@@ -69,4 +69,9 @@
     <string name="expanded_desktop_state">Expanded state</string>
     <string name="expanded_enabled_for_all">Enabled for all</string>
     <string name="expanded_user_configurable">User configurable</string>
+
+    <!-- QuickSettings haptic feedback -->
+    <string name="quick_settings_vibrate_title">Vibrate on touch</string>
+    <string name="quick_settings_vibrate_summary">Vibrate when touching tiles</string>
+
 </resources>
