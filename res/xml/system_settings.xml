@@ -108,6 +108,11 @@
                 android:key="hfm_settings"
                 android:title="@string/hfm_pref_screen_title"
                 android:fragment="com.android.settings.rastapop.hfm.HfmSettings" />
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="quick_settings_vibrate"
+            android:title="@string/quick_settings_vibrate_title"
+            android:summary="@string/quick_settings_vibrate_summary"
+            android:defaultValue="false"/>
         <SwitchPreference
             android:key="advanced_reboot"
             android:summary="@string/advanced_reboot_summary"

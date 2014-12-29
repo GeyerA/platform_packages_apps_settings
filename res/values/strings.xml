@@ -6117,6 +6117,10 @@
     <string name="unlock_quick_unlock_control_title">Quick unlock</string>
     <string name="unlock_quick_unlock_control_summary">Unlock automatically when the correct PIN/password is entered</string>
 
+    <!-- QuickSettings haptic feedback -->
+    <string name="quick_settings_vibrate_title">Vibrate on touch</string>
+    <string name="quick_settings_vibrate_summary">Vibrate when touching tiles</string>
+
     <!-- Lockscreen pin shuffle -->
     <string name="lock_numpad_random_title">Change the order of PIN pad numbers</string>
     <string name="lock_numpad_random_dialog_title">PIN pad random order</string>
