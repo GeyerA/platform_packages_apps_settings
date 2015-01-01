@@ -110,15 +110,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         int statusBarBrightnessControl = Settings.System.getInt(getContentResolver(),
                 STATUS_BAR_BRIGHTNESS_CONTROL, 0);
         mStatusBarBrightnessControl.setChecked(statusBarBrightnessControl != 0);
-        try {
-            if (Settings.System.getInt(getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS_MODE) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                mStatusBarBrightnessControl.setEnabled(false);
-                mStatusBarBrightnessControl.setSummary(R.string.status_bar_brightness_control_info);
-            }
-        } catch (SettingNotFoundException e) {
-            // what do you expect me to do?
-        }
 
         // navigation bar height
         mNavigationBarHeight = (ListPreference) findPreference(NAVIGATION_BAR_HEIGHT);
