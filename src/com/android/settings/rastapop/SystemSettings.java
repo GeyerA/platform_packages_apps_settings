@@ -21,6 +21,7 @@ import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.cyanogenmod.SystemSettingSwitchPreference;
 
 public class SystemSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -345,10 +346,16 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         if (value == 0) {
             Settings.System.putInt(resolver, Settings.System.RECENTS_CLEAR_ALL_LOCATION, 0);
-            summary = R.string.recents_clear_all_location_right;
+            summary = R.string.recents_clear_all_location_top_right;
         } else if (value == 1) {
             Settings.System.putInt(resolver, Settings.System.RECENTS_CLEAR_ALL_LOCATION, 1);
-            summary = R.string.recents_clear_all_location_left;
+            summary = R.string.recents_clear_all_location_top_left;
+        } else if (value == 2) {
+            Settings.System.putInt(resolver, Settings.System.RECENTS_CLEAR_ALL_LOCATION, 2);
+            summary = R.string.recents_clear_all_location_bottom_right;
+        } else if (value == 3) {
+            Settings.System.putInt(resolver, Settings.System.RECENTS_CLEAR_ALL_LOCATION, 3);
+            summary = R.string.recents_clear_all_location_bottom_left;
         }
         if (mRecentsClearAllLocation != null && summary != -1) {
             mRecentsClearAllLocation.setSummary(res.getString(summary));
