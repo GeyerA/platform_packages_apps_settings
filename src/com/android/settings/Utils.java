@@ -976,6 +976,22 @@ public final class Utils {
         return sb.toString();
     }
 
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        if (pkg == null) {
+            return false;
+        }
+        try {
+            PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+            if (!pi.applicationInfo.enabled) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NameNotFoundException e) {
+            return false;
+        }
+    }
+
     private static int getScreenType(Context con) {
         if (mDeviceType == -1) {
             WindowManager wm = (WindowManager)con.getSystemService(Context.WINDOW_SERVICE);
