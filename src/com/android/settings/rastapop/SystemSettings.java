@@ -21,7 +21,6 @@ import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.cyanogenmod.SystemSettingSwitchPreference;
 
 public class SystemSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
@@ -95,6 +94,9 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_settings);
         loadResources();
+
+	PreferenceScreen prefSet = getPreferenceScreen();
+	ContentResolver resolver = getActivity().getContentResolver();
 
         // status bar native battery percentage
         mStatusBarNativeBatteryPercentage = (SwitchPreference) findPreference(STATUS_BAR_NATIVE_BATTERY_PERCENTAGE);
@@ -289,7 +291,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             Settings.Secure.putInt(getContentResolver(), KILL_APP_LONGPRESS_BACK,
                     value ? 1 : 0);
             return true;
-
+        // Net traffic
         } else if (preference == mNetTrafficState) {
             int intState = Integer.valueOf((String)objValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UP, getBit(intState, MASK_UP));
@@ -321,14 +323,14 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             int index = mNetTrafficPeriod.findIndexOfValue((String) objValue);
             mNetTrafficPeriod.setSummary(mNetTrafficPeriod.getEntries()[index]);
             return true;
-
-        } else if (preference == mRecentsClearAll) {
-            boolean show = (Boolean) newValue;
+        // Recents clear all
+	} else if (preference == mRecentsClearAll) {
+            boolean show = (Boolean) objValue;
             Settings.System.putIntForUser(getActivity().getContentResolver(),
                     Settings.System.SHOW_CLEAR_ALL_RECENTS, show ? 1 : 0, UserHandle.USER_CURRENT);
             return true;
         } else if (preference == mRecentsClearAllLocation) {
-            int location = Integer.valueOf((String) newValue);
+            int location = Integer.valueOf((String) objValue);
             Settings.System.putIntForUser(getActivity().getContentResolver(),
                     Settings.System.RECENTS_CLEAR_ALL_LOCATION, location, UserHandle.USER_CURRENT);
             updateRecentsLocation(location);
