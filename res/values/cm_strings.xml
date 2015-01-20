@@ -47,6 +47,8 @@
     <string name="qs_main_tiles_summary_off">Three tiles on each row</string>
     <string name="qs_advanced_location_title">Advanced location quick settings</string>
     <string name="qs_advanced_location_summary">Enable advanced settings for location in quick settings</string>
+    <string name="qs_wifi_detail_title">Show Wi-Fi detail</string>
+    <string name="qs_wifi_detail_summary">Enable detail view for Wi-Fi in Quick Settings</string>
 
     <!-- WiFi Ad-Hoc mode -->
     <string name="wifi_mode">Mode</string>
