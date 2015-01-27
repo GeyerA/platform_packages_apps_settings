@@ -82,7 +82,7 @@ public class QSTiles extends Fragment implements
         mDraggableGridView.setOnRearrangeListener(this);
         mDraggableGridView.setOnItemClickListener(this);
         mDraggableGridView.setUseLargeFirstRow(Settings.Secure.getInt(resolver,
-                Settings.Secure.QS_USE_MAIN_TILES, 1) == 1);
+                Settings.System.QS_USE_MAIN_TILES, 1) == 1);
     }
 
     @Override
@@ -193,7 +193,7 @@ public class QSTiles extends Fragment implements
             }
         }
 
-        Settings.System.putString(resolver, Settings.Secure.QS_TILES, tiles.toString());
+        Settings.System.putString(resolver, Settings.System.QS_TILES, tiles.toString());
     }
 
     private View buildQSTile(String tileType) {
