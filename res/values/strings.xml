@@ -6282,6 +6282,7 @@
     <string name="qs_screen_off_tile">Screen off</string>
     <string name="qs_tile_screen_timeout">Screen timeout</string>
     <string name="qs_sync_tile">Sync</string>
+    <string name="qs_tile_usb_tether">USB tethering</string>
 
     <!-- Disable lockscreen visualiser -->
     <string name="lockscreen_visualizer_title">Display music visualizer</string>
