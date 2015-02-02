@@ -6097,9 +6097,15 @@
     <string name="profile_reset_title">Reset</string>
     <string name="profiles_add">Add</string>
     <string name="profile_choose_app">Choose app</string>
+    <string name="colors_title">Colors</string>
+    <string name="text_title">Text</string>
+    <string name="icons_title">Icons</string>
 
     <!-- Generic strings -->
     <string name="ok_string">OK</string>
+    <string name="reset_to_default">Reset values to default?</string>
+    <string name="reset_android">Android</string>
+    <string name="reset_settings">Settings</string>
     <string name="default_string">Default</string>
     <string name="enabled_string">Enabled</string>
     <string name="disabled_string">Disabled</string>
@@ -6181,13 +6187,26 @@
     <string name="status_bar_show_weather_title">Show weather</string>
     <string name="status_bar_show_weather_summary">Show the weather in the status bar header</string>
 
-    <!-- Lock screen -->
+    <!-- Lockscreen Weather -->
     <string name="lock_screen_weather_settings_title">Lockscreen weather</string>
-    <!-- Weather settings -->
     <string name="weather_show_weather_title">Show weather</string>
     <string name="weather_show_weather_summary">Enable to show weather informations</string>
     <string name="weather_show_location_title">Show location</string>
     <string name="weather_show_location_summary">Enable to show the location</string>
+    <string name="lock_screen_weather_settings_title">Lockscreen weather</string>
+    <string name="weather_show_weather_title">Show weather</string>
+    <string name="weather_show_weather_summary">Enable to show weather informations</string>
+    <string name="weather_show_location_title">Show location</string>
+    <string name="weather_show_location_summary">Enable to show the location</string>
+    <string name="weather_show_timestamp_title">Show timestamp</string>
+    <string name="weather_show_timestamp_summary">Enable to show the timestamp</string>
+    <string name="weather_condition_icon_title">Condition icon</string>
+    <string name="weather_condition_icon_dlg_title">Coose an icon for displaying the weather condition</string>
+    <string name="weather_condition_icon_monochrome_title">Monochrome</string>
+    <string name="weather_condition_icon_colored_title">Colored</string>
+    <string name="weather_condition_icon_vclouds_title">VClouds</string>
+    <string name="weather_colorize_all_icons_title">Colorize all icons</string>
+    <string name="weather_colorize_all_icons_summary">Enable to colorize all icons, disable to colorize only the monochrome icons</string>
 
     <!-- Kernel Tweaker -->
     <string name="kernel_tweaker_title">Kernel tweaker</string>
