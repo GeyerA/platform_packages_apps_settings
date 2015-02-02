@@ -84,6 +84,34 @@
     <string name="profile_reset_title">Reset</string>
     <string name="profile_reset_message">Delete all user created profiles and restore them to default?</string>
 
+    <!-- Generic strings -->
+    <string name="ok_string">OK</string>
+    <string name="reset_to_default">Reset values to default?</string>
+    <string name="reset_android">Android</string>
+    <string name="reset_settings">Settings</string>
+    <string name="default_string">Default</string>
+    <string name="enabled_string">Enabled</string>
+    <string name="disabled_string">Disabled</string>
+    <string name="general_string">General</string>
+    <string name="reset_string">Reset</string>
+    <string name="reset">Reset</string>
+    <string name="empty_string">Empty</string>
+    <string name="ok">OK</string>
+    <string name="font_size_sample">Sample</string>
+    <string name="colors_title">Colors</string>
+    <string name="text_title">Text</string>
+    <string name="icons_title">Icons</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on color below to apply</string>
+    <string name="arrow_right">→</string>
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#ff000000</string>
+    <string name="set">Set</string>
+    <string name="color_default">Default</string>
+
     <!-- Profile network mode -->
     <string name="profile_networkmode_2g">2G</string>
     <string name="profile_networkmode_3g">3G</string>
