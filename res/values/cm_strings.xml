@@ -51,6 +51,7 @@
     <string name="qs_wifi_detail_title">Show Wi-Fi detail</string>
     <string name="qs_wifi_detail_summary">Enable detail view for Wi-Fi in Quick Settings</string>
     <string name="qs_tile_visualizer">Visualiser</string>
+    <string name="qs_expanded_desktop_tile">Expanded desktop</string>
     <string name="qs_screen_off_tile">Screen off</string>
 
     <!-- WiFi Ad-Hoc mode -->
