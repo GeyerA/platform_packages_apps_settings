@@ -91,8 +91,8 @@
 		android:title="@string/bitsyko_layers">     
 		<intent
                     android:action="android.intent.action.MAIN"
-                    android:targetPackage="org.bitsyko.overlaymanager"
-                    android:targetClass="org.bitsyko.overlaymanager.main" />
+                    android:targetPackage="com.lovejoy777.rroandlayersmanager"
+                    android:targetClass="com.lovejoy777.rroandlayersmanager.menu" />
         </dashboard-tile>
 
     <!-- Kernel Tweaker -->
