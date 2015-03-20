@@ -6050,7 +6050,6 @@
    <string name="imei_information_summary">IMEI relative information</string>
    <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
 
-<<<<<<< HEAD
     <!-- Generic strings -->
     <string name="ok_string">OK</string>
     <string name="default_string">Default</string>
@@ -6142,10 +6141,10 @@
     <string name="restart_systemui">Restart SystemUI</string>
 
     <!-- LockClock and Weather -->
-    <string name="clock_weather_title">LockClock and weather settings</string>
-    <string name="clock_weather_summary">Enable/disable weather + settings for cLock widget</string>
     <string name="lock_clock_title">cLock settings</string>
     <string name="lock_clock_summary">View or change how the \'cLock\' widget will be displayed.</string>
+    <string name="weather_clock_title">Status bar weather</string>
+    <string name="weather_clock_summary">View or change status bar weather settings</string>
 
     <!--Quick unlock -->
     <string name="unlock_quick_unlock_control_title">Quick unlock</string>
