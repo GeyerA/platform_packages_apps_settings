@@ -102,6 +102,10 @@ public class QSTileHolder {
                 resourceName = "ic_qs_compass_on";
                 stringId = R.string.qs_tile_compass;
                 break;
+            case QSConstants.TILE_SCREEN_OFF:
+                resourceName = "ic_qs_power";
+                stringId = R.string.qs_screen_off_tile;
+                break;
             case QSConstants.TILE_SCREEN_TIMEOUT:
                 resourceName = "ic_qs_screen_timeout_vector";
                 stringId = R.string.qs_tile_screen_timeout;

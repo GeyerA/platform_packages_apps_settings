@@ -6251,6 +6251,7 @@
     <string name="qs_tile_hotspot">Hotspot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_compass">Compass</string>
+    <string name="qs_screen_off_tile">Screen off</string>
     <string name="qs_tile_screen_timeout">Screen timeout</string>
 
     <!-- QuickSettings haptic feedback -->
