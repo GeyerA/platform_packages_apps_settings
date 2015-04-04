@@ -94,6 +94,10 @@ public class QSTileHolder {
                 resourceName = "ic_qs_hotspot_on";
                 stringId = R.string.qs_tile_hotspot;
                 break;
+            case QSConstants.TILE_EXPANDED_DESKTOP:
+                resourceName = "ic_qs_expanded_desktop";
+                stringId = R.string.qs_expanded_desktop_tile;
+                break;
             case QSConstants.TILE_NFC:
                 resourceName = "ic_qs_nfc_on";
                 stringId = R.string.qs_tile_nfc;
