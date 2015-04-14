@@ -56,14 +56,14 @@ public class DraggableGridView extends ViewGroup implements
     private boolean mUseLargerFirstRow = false;
 
     /**
-     * Use three or four columns.
+     * Use three or five columns.
      */
     private int columnCount() {
-        boolean shouldUseFourColumns = Settings.Secure.getInt(
-            mContext.getContentResolver(), Settings.Secure.QS_USE_FOUR_COLUMNS,
+        boolean shouldUseFiveColumns = Settings.Secure.getInt(
+            mContext.getContentResolver(), Settings.Secure.QS_USE_FIVE_COLUMNS,
                 0) == 1;
-        if (shouldUseFourColumns) {
-            COL_COUNT = 4;
+        if (shouldUseFiveColumns) {
+            COL_COUNT = 5;
         } else {
             COL_COUNT = 3;
         }
