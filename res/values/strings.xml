@@ -6282,6 +6282,9 @@
     <string name="qs_screen_off_tile">Screen off</string>
     <string name="qs_tile_screen_timeout">Screen timeout</string>
 
+    <!-- Disable lockscreen visualiser -->
+    <string name="lockscreen_visualizer_title">Display music visualizer</string>
+
     <!-- QuickSettings haptic feedback -->
     <string name="quick_settings_vibrate_title">Vibrate on touch</string>
     <string name="quick_settings_vibrate_summary">Vibrate when touching tiles</string>
