@@ -50,10 +50,6 @@ public class QSTileHolder {
         switch (tileType) {
             case TILE_ADD_DELETE:
                 break;
-            case QSConstants.TILE_VISUALIZER:
-                resourceName = "ic_qs_visualizer_static";
-                stringId = R.string.qs_tile_visualizer;
-                break;
             case QSConstants.TILE_WIFI:
                 resourceName = "ic_qs_wifi_full_4";
                 stringId = R.string.qs_tile_wifi;
