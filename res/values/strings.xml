@@ -6959,5 +6959,4 @@
     <string name="write_settings_on">Yes</string>
     <!-- Summary of app not allowed to write system settings [CHAR LIMIT=45] -->
     <string name="write_settings_off">No</string>
-
 </resources>
