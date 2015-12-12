@@ -22,7 +22,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.TrafficStats;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -30,6 +29,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -66,7 +66,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     private ListPreference mStatusBarClock;
     private ListPreference mStatusBarAmPm;
-    private CheckBoxPreference mClockUseSecond;
+    private SwitchPreference mClockUseSecond;
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarBatteryShowPercent;
 
@@ -84,7 +84,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.status_bar_settings);
-        PreferenceScreen prefSet = getPreferenceScreen();
         loadResources();
 
         ContentResolver resolver = getActivity().getContentResolver();
@@ -156,7 +155,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 getPreferenceScreen().removePreference(findPreference(NETWORK_TRAFFIC_UNIT));
                 getPreferenceScreen().removePreference(findPreference(NETWORK_TRAFFIC_PERIOD));
             }
-         mClockUseSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+         mClockUseSecond = (SwitchPreference) findPreference(CLOCK_USE_SECOND);
          mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.CLOCK_USE_SECOND, 0) == 1));
     }
