@@ -6085,4 +6085,7 @@
         <!-- Statusbar Second Clock -->
     <string name="clock_use_second">Use second clock</string>
     <string name="clock_use_second_summary">Show second in clock</string>
+
+    <!-- Kernel Tweaker -->
+    <string name="kernel_tweaker_title">Kernel tweaker</string>
 </resources>
