@@ -18,6 +18,7 @@ package com.android.settings.cyanogenmod;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.ListPreference;
@@ -30,6 +31,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.cyanogenmod.qs.QSTiles;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.util.Helpers;
 
 import cyanogenmod.providers.CMSettings;
 
@@ -39,16 +41,25 @@ import java.util.List;
 public class NotificationDrawerSettings extends SettingsPreferenceFragment implements Indexable,
         Preference.OnPreferenceChangeListener {
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String KEY_LOCKCLOCK = "lock_clock";
+    public static final String LOCKCLOCK_PACKAGE_NAME = "com.cyanogenmod.lockclock";
 
     private ListPreference mQuickPulldown;
     private Preference mQSTiles;
+    private Preference mLockClock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.notification_drawer_settings);
-
+        PackageManager pm = getPackageManager();
         mQSTiles = findPreference("qs_order");
+
+        mLockClock = (Preference) getPreferenceScreen()
+                .findPreference(KEY_LOCKCLOCK);
+        if (!Helpers.isPackageInstalled(LOCKCLOCK_PACKAGE_NAME, pm)) {
+            getPreferenceScreen().removePreference(mLockClock);
+        }
     }
 
     @Override
