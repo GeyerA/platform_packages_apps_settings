@@ -77,7 +77,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
     private ListPreference mClockDateStyle;
     private ListPreference mClockDateFormat;
     private SwitchPreference mStatusBarClock;
-    private CheckBoxPreference mClockUseSecond;
+    private SwitchPreference mClockUseSecond;
 
     private boolean mCheckPreferences;
 
@@ -126,7 +126,7 @@ public class StatusBarClockStyle extends SettingsPreferenceFragment
         }
         mClockAmPmStyle.setEnabled(!is24hour);
 
-         mClockUseSecond = (CheckBoxPreference) prefSet.findPreference(CLOCK_USE_SECOND);
+         mClockUseSecond = (SwitchPreference) findPreference(CLOCK_USE_SECOND);
          mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.CLOCK_USE_SECOND, 0) == 1));
 

@@ -23,7 +23,7 @@
             android:title="@string/status_bar_show_clock_title"
             android:defaultValue="true" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="clock_use_second"
             android:title="@string/clock_use_second"
             android:summary="@string/clock_use_second_summary"
