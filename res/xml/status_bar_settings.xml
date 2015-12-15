@@ -32,6 +32,12 @@
         android:entries="@array/status_bar_battery_percentage_entries"
         android:entryValues="@array/status_bar_battery_percentage_values" />
 
+    <PreferenceScreen
+        android:fragment="com.android.settings.cyanogenmod.StatusBarClockStyle"
+        android:key="clock_style_pref"
+	android:summary="@string/status_bar_clock_summary"
+        android:title="@string/status_bar_clock" />
+
      <PreferenceCategory
             android:key="category_network_traffic"
             android:title="@string/network_traffic_title">
