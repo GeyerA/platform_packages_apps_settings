@@ -53,7 +53,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     private static final String STATUS_BAR_CLOCK_STYLE = "status_bar_clock";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
-    private static final String CLOCK_USE_SECOND = "clock_use_second";
     private static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
@@ -66,7 +65,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     private ListPreference mStatusBarClock;
     private ListPreference mStatusBarAmPm;
-    private SwitchPreference mClockUseSecond;
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarBatteryShowPercent;
 
@@ -155,9 +153,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 getPreferenceScreen().removePreference(findPreference(NETWORK_TRAFFIC_UNIT));
                 getPreferenceScreen().removePreference(findPreference(NETWORK_TRAFFIC_PERIOD));
             }
-         mClockUseSecond = (SwitchPreference) findPreference(CLOCK_USE_SECOND);
-         mClockUseSecond.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.CLOCK_USE_SECOND, 0) == 1));
     }
 
     @Override
@@ -268,18 +263,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                     return result;
                 }
             };
-
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
-        boolean value;
-        if (preference == mClockUseSecond) {
-            value = mClockUseSecond.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.CLOCK_USE_SECOND, value ? 1 : 0);
-            return true;
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
 
     private void loadResources() {
         Resources resources = getActivity().getResources();

@@ -6082,10 +6082,6 @@
     <string name="show_activity_indicators_on_status_bar_title">Activity indicators</string>
     <string name="show_activity_indicators_on_status_bar_summary">Show indicators in signal bars</string>
 
-        <!-- Statusbar Second Clock -->
-    <string name="clock_use_second">Use second clock</string>
-    <string name="clock_use_second_summary">Show second in clock</string>
-
     <!-- Lockscreen Weather -->
     <string name="lock_screen_weather_settings_title">Lockscreen weather</string>
     <!-- Weather settings -->
